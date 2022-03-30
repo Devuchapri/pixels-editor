@@ -1,0 +1,12 @@
+.vscode
+./Advance/node_modules
+./Advance/package-lock.json
+./Advance/package.json
+./Advance/.vscode
+./Advance/script/node_modules
+./Advance/script/otfs
+./Advance/script/svgs
+./Advance/script/CanvasStack-2v01.js
+./Advance/script/package-lock.json
+./Advance/script/package.json
+./Advance/script/LICENSE.txt

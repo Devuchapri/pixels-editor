@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="icon" href="../Assets/logo.png">
+    <title>Pixels Edits</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Links -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+    <!-- <link rel="stylesheet" href="tailwind.css"> -->
+    <link href="https://kit-pro.fontawesome.com/releases/v5.15.4/css/pro.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css (1)/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Architects+Daughter&family=Balsamiq+Sans&family=Black+Ops+One&family=Bungee&family=Bungee+Hairline&family=Bungee+Inline&family=Bungee+Outline&family=Bungee+Shade&family=Caveat&family=Comforter&family=Dongle:wght@300&family=Indie+Flower&family=Inter:wght@100&family=Lobster&family=Mochiy+Pop+P+One&family=Montserrat:wght@100&family=Mukta:wght@200&family=Neonderthaw&family=Nova+Script&family=Open+Sans+Condensed:wght@300&family=Open+Sans:wght@300&family=Pacifico&family=Patrick+Hand&family=Permanent+Marker&family=Redacted+Script:wght@300&family=Righteous&family=Roboto+Condensed:wght@300&family=Roboto+Mono:wght@100&family=Rubik+Beastly&family=Rubik:wght@300&family=Sedgwick+Ave&family=Shadows+Into+Light&family=Titillium+Web:wght@200&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <!-- <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script> -->
+</head>
+
+<body class=" md:text-lg overflow-hidden
+" onbeforeunload="return leave()" onload="move('canvasdiv')">
+    <div id="context-menu-layer" class="topbar-bg w-56 hidden rounded-md absolute space-y-10 z-50 innder-shadow">
+        <ul>
+            <li class="py-2 px-8 cursor-pointer text-white rounded-t-md hover:bg-cyan-400">+ &nbsp; New Project</li>
+            <li class="py-2 px-8 cursor-pointer text-white hover:bg-cyan-400"><i class="fad fa-file-plus"></i> &nbsp; Add a Photo</li>
+            <li class="py-2 px-8 cursor-pointer text-white hover:bg-cyan-400"><i class="fad fa-undo"></i> &nbsp; Undo
+            </li>
+            <li class="py-2 px-8 cursor-pointer text-white hover:bg-cyan-400"><i class="fad fa-redo"></i> &nbsp; Redo
+            </li>
+            <li class="py-2 px-8 cursor-pointer text-white hover:bg-cyan-400"><i class="fad fa-cut"></i> &nbsp; Cut</li>
+            <li class="py-2 px-8 cursor-pointer text-white hover:bg-cyan-400"><i class="fad fa-copy"></i> &nbsp; Copy
+            </li>
+            <li class="py-2 px-8 cursor-pointer text-white hover:bg-cyan-400"><i class="fad fa-paste"></i> &nbsp; Paste
+            </li>
+            <li class="py-2 px-8 cursor-pointer text-white rounded-b-md hover:bg-cyan-400"><i class="fad fa-terminal"></i> &nbsp; <a href="https://google.com" target="_blank">Console</a>
+            </li>
+        </ul>
+    </div>
+
+    <div>
+
+        <!-- Body -->
+        <div id="body" class="overflow-hidden overflow-y-scroll w-screen mx-80 my-96">
+
+            <!-- Upload -->
+            <input type="file" name="" id="uploadinp" class="hidden" accept="image/*">
+            <button id="uploadbtn" class="px-20 py-2 text-white absolute my-80 mx-24 top-0 left-24 bg-black rounded-lg upload z-40">Upload
+                Picture</button>
+            <div id="canvasdiv" class="absolute top-40 left-40">
+                <canvas id="canvas" class="absolute  top-[1px] lg:left-[1px] md:left-[1px] canvas z-0">FUCK
+                    YOU!</canvas>
+            </div>
+            <img src="" alt="" id="img" class="hidden">
+        </div>
+
+
+        <!-- Box -->
+        <div id="box">
+
+            <div id="drawbox" class="div-bg h top
+            text-white p-8  absolute right-0 overflow-hidden  bottom-0 
+            md:h top select-none backdrop-blur-md
+             overflow-y-scroll hidden width box">
+
+
+
+                <div class="layerpara space-y-3 h-full absolute top-[20%] w-[90%]" id="layershown">
+                    <p class="para" id="layer0">Layer <span>0</span></p>
+                </div>
+
+                <hr>
+
+                <div class="font-mono bg-black w-full fixed top-0 left-0" id="addlayer">
+                    <ul class="ul flex w-full sticky" id="contlay">
+                        <li id="layerbtn" class="cursor-pointer py-4 px-5 lihover hover:bg-cyan-400">Add Layers</li>
+                        <li id="deletelayer" class="cursor-pointer py-4 text-center ihover hover:bg-cyan-400">Delete Layers
+                        </li>
+                        <li id="copylayer" class="cursor-pointer py-4 text-center ihover hover:bg-cyan-400">Copy Layers
+                        </li>
+                        <li id="zindexlayer" class="cursor-pointer py-4 text-center px-5 ihover hover:bg-cyan-400">Set Zindex of Layers</li>
+                        <li id="currentlayer" class="cursor-pointer py-4 text-center ihover hover:bg-cyan-400 ">Current Layers
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="layerbox" class="div-bg h top
+            text-white p-8  absolute right-0 overflow-hidden  bottom-0 
+            md:h top select-none backdrop-blur-md
+             overflow-y-scroll hidden width box">
+                <div id="filter">
+                    <p class="font-mono text-xl hr">Dhokla Effect</p>
+                    <!-- <hr> -->
+                    <div id="" class="bg-black mt-5 rounded-md" value="50">
+                        <p class="mx-10 pt-2 text-xl font-thin font-mono">Thickness</p>
+                        <input type="range" name="" id="thicknessf" class="range mx-10 my-5" value="10" min="10" max="50">
+                    </div>
+                    <div id="" class="bg-black  mt-5 rounded-md">
+                        <p class="mx-10 pt-2 text-xl font-thin font-mono">Blur</p>
+                        <input type="range" name="" id="blurf" class="range mx-10 my-5" value="10" min="10" max="50">
+                        <p class="mx-10 pt-2 text-xl font-thin font-mono">Brightness</p>
+                        <input type="range" name="" id="brightf" class="range mx-10 my-5" value="1" max="10">
+                        <p class="mx-10 pt-2 text-xl font-thin font-mono">Contrast</p>
+                        <input type="range" name="" id="contrastf" class="range mx-10 my-5" value="89" max="200">
+                        <p class="mx-10 pt-2 text-xl font-thin font-mono">Saturation</p>
+                        <input type="range" name="" id="saturationf" class="range mx-10 my-5" value="89" max="200">
+                        <p class="mx-10 pt-2 text-xl font-thin font-mono">Invert</p>
+                        <input type="range" name="" id="invertf" class="range mx-10 my-5" value="0">
+                        <p class="mx-10 pt-2 text-xl font-thin font-mono">Sepia</p>
+                        <input type="range" name="" id="sepiaf" class="range mx-10 my-5" value="0">
+                    </div>
+                    <button id="donef" class="rounded-md bg-black px-40 py-2 my-5 mx-14 font-mono">Done</button>
+                </div>
+                <div id="Erase">
+                    <p class="font-mono text-xl hr">Erase</p>
+                    <!-- <hr> -->
+                    <div id="thickness" class="bg-black  mt-5 rounded-md">
+                        <p class="mx-10 pt-2 text-xl font-thin font-mono">Thickness</p>
+                        <input type="range" name="" id="thicknesse" class="range mx-10 my-5" value="100" max="200">
+                    </div>
+                    <button class="rounded-md bg-black px-40 py-2 my-5 mx-14 font-mono" id="donee">Done</button>
+                </div>
+                <div id="normal">
+                    <p class="font-mono text-xl hr">Normal</p>
+                    <div id="thicknessn" class="bg-black  mt-5 rounded-md">
+                        <p class="mx-10 pt-2 text-xl font-thin font-mono">Thickness</p>
+                        <input type="range" name="" id="thicknessd" class="range mx-10 my-5" value="50">
+                    </div>
+                    <div id="blurn" class="bg-black  mt-5 rounded-md">
+                        <p class="mx-10 pt-2 text-xl font-thin font-mono">Blur</p>
+                        <input type="range" name="" id="blurd" class="range mx-10 my-5" value="50">
+                    </div>
+                    <div id="colorn" class="bg-black  mt-5 rounded-md cursor-pointer">
+                        <div id="indicator">
+                            <p class="text-xl py-5 font-thin font-mono text-center" id="ipn">#FFFFFF</p>
+                        </div>
+                    </div>
+                    <div id="colorpicker" class="absolute left-[30%] hidden top-[80%] bg-white p-4 rounded-md">
+
+                    </div>
+                    <button class="rounded-md bg-black  px-40 py-2 mt-5 mb-[2rem] mx-14 font-mono" id="doned">Done</button>
+                </div>
+
+            </div>
+
+            <div id="textbox" class="div-bg h top
+            text-white p-8 absolute right-0 overflow-hidden  bottom-0 
+            md:h top select-none backdrop-blur-md
+             overflow-y-scroll hidden width box">
+                <input type="text" placeholder="Your text" class="outline-none topbar-bg text-center py-2 w-[99%] rounded-sm" id="textinput">
+                <button class="rounded-md topbar-bg px-20 py-2 my-5 mx-[6rem] font-mono" id="donet">
+                    <p class="text-center">+ Add <b>TEXT</b></p>
+                </button>
+
+                <input type="Number" placeholder="Enter the text number" class="outline-none topbar-bg text-center py-2 w-[85%] rounded-sm" id="textnumber">
+
+                <button class="topbar-bg px-[1.5rem] py-[0.5rem] absolute top-[13.5rem] right-4 font-mono" id="donent">
+                    <p class="text-center">Go</p>
+                </button>
+            </div>
+
+            <div id="textcosbox" class="div-bg h top
+            text-white p-8  absolute right-0 overflow-hidden  bottom-0 
+            md:h select-none backdrop-blur-md
+             overflow-y-scroll hidden width box">
+                <div id="listcos" class="layerpara space-y-3 h-full absolute top-[10%] w-[90%]"></div>
+
+                <div id="optioncos" class="div-bg h top-0
+                text-white p-8 w-full absolute right-0 overflow-hidden md:w-full bottom-0 
+                md:h select-none backdrop-blur-md
+                 overflow-y-scroll hidden width">
+
+                    <button class="delete hidden" id="deletetext"><i class="fad fa-trash"></i> Delete</button>
+                    <i class="fad fa-angle-left back" id="backcos"></i>
+                    <hr class="h-[2px] border-none bg-slate-800">
+
+                    <input type="text" placeholder="Change text" class="topbar-bg px-2 text-center rounded-sm py-2 mt-[4.5rem] w-full outline-none font-mono" id="textinput2">
+
+                    <input type="number" placeholder="x-coordinate" class="topbar-bg px-2 text-center rounded-sm py-2 mt-[4.5rem] w-full outline-none font-mono" id="x-coordinate" value="50">
+                    <input type="number" placeholder="y-coordinate" class="topbar-bg px-2 text-center rounded-sm py-2 mt-[2.5rem] w-full outline-none font-mono" id="y-coordinate" value="50">
+                    <input type="number" placeholder="font-size" id="font-size" class="topbar-bg px-2 text-center rounded-sm py-2 mt-[2.5rem] w-full outline-none font-mono" value="30">
+                    <input type="number" placeholder="Opacity" class="topbar-bg px-2 text-center rounded-sm py-2 mt-[2.5rem] w-full outline-none font-mono" id="opacity" value="1" max="1" min="0">
+
+                    <p class="topbar-bg px-2 text-center rounded-sm py-2 mt-[2.5rem] w-full outline-none font-mono cursor-pointer" id="select-font">
+                        Select Font</p>
+
+                    <div id="colort" class="topbar-bg mt-5 rounded-md cursor-pointer">
+                        <div id="indicatort">
+                            <p class="text-xl py-5 font-thin font-mono text-center" id="ipt">#FFFFFF</p>
+                        </div>
+                    </div>
+                    <div id="colorpickert" class="absolute left-[30%] hidden top-[50%] bg-white p-4 rounded-md">
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="shapesbox" class="div-bg h lg:top-0
+            text-white p-8  absolute right-0 overflow-hidden  bottom-0 
+            md:h select-none hidden backdrop-blur-md
+             overflow-y-scroll  width box">
+                <div id="gridentshape">
+                    <div class="w-full mx-[0.5rem] my-[3.25rem] bg-orange-500 h-[3.5rem] bg-gradient-to-r from-pink-500 rounded cursor-pointer" id="gridentshapediv"></div>
+
+                    <div id="gridentshapebox" class="topbar-bg h mx-[0.5rem]
+                    text-white p-8 w-full overflow-hidden md:w-full 
+                    md:h select-none hidden backdrop-blur-md
+                     overflow-y-scroll  width rounded">
+                        <input type="text" name="" id="firstcolorshape" placeholder="Enter the first color" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black">
+                        <input type="text" name="" id="seccolorshape" placeholder="Enter the sec color" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black">
+                        <input type="number" name="" id="angleshape" placeholder="Enter the angle" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black" value="50">
+                        <input type="number" name="" id="fwshape" placeholder="Enter the firstcolor width" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black" value="20">
+                        <input type="number" name="" id="xshape" placeholder="Enter the x-coordinate" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black" value="0">
+                        <input type="number" name="" id="yshape" placeholder="Enter the y-coordinate" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black" value="0">
+                        <input type="number" name="" id="hshape" placeholder="Enter the height" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black" value="30">
+                        <input type="number" name="" id="wshape" placeholder="Enter the width" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black" value="60">
+
+                        <p class="font-mono text-center mt-5 cursor-pointer text-violet-400 filter brightness-105 underline-offset-4	 rounded decoration-inherit hover:underline
+                        " id="wahfull">Full width and height</p>
+                    </div>
+                </div>
+
+                <div id="gridentcircle">
+                    <div class="w-[14.333333%] mx-[0.5rem] my-[3.25rem] bg-orange-500 h-[3.5rem]  rounded-full cursor-pointer" id="gridentcirclediv"></div>
+
+                    <div id="gridentcirclebox" class="topbar-bg h mx-[0.5rem]
+                    text-white p-8 w-full overflow-hidden md:w-full
+                    md:h select-none  backdrop-blur-md
+                     overflow-y-scroll  width rounded hidden">
+                        <input type="text" name="" id="layergcircle" placeholder="Layer number" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black">
+                        <input type="text" name="" id="firstcolorcircle" placeholder="color" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black">
+                        <input type="number" name="" id="xcircle" placeholder="Enter the x-coordinate" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black" value="35">
+                        <input type="number" name="" id="ycircle" placeholder="Enter the y-coordinate" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black" value="35">
+                        <input type="number" name="" id="rcircle" placeholder="Enter the radius" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black" value="20">
+                        <input type="number" name="" id="lwcircle" placeholder="Enter the LineWidth" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black" value="1" min="0">
+                        <input type="number" name="" id="angcircle" placeholder="Enter the Angle" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black" value="360" min="0">
+                        <input type="text" name="" id="fscircle" placeholder="FILL OR BORDER" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black" value="fill">
+                    </div>
+                </div>
+
+                <div id="normalrect">
+                    <div class="w-full mx-[0.5rem] my-[3.25rem] bg-orange-500 h-[3.5rem]  cursor-pointer" id="normalrectdiv"></div>
+
+                    <div id="normalrectbox" class="hidden topbar-bg h mx-[0.5rem]
+                    text-white p-8 w-full overflow-hidden md:w-full
+                    md:h select-none  backdrop-blur-md
+                     overflow-y-scroll  width rounded ">
+                        <input type="number" name="" id="lnr" placeholder="Enter the layer number" class="topbar-bg px-2 text-center rounded-sm py-2  w-full outline-none font-mono bg-black">
+                        <hr class="outline-none border-2 border-none h-[1px] bg-black mt-5">
+                        <div id="colorpickernr" class="mx-[5.25rem] hidden outline-none">
+
+                        </div>
+                        <p id="colorindicator" class="font-mono text-center my-5 bg-black py-5 rounded cursor-pointer">
+                            #ffffff</p>
+
+                        <input type="number" name="" id="hnr" placeholder="Enter the height" class="topbar-bg px-2 text-center rounded-sm py-2  w-full outline-none font-mono bg-black" value="0" min="0">
+                        <input type="number" name="" id="wnr" placeholder="Enter the width" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black" value="0" min="0">
+                        <input type="number" name="" id="xnr" placeholder="Enter the x-coordinate" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black" value="0" min="0">
+                        <input type="number" name="" id="lwnr" placeholder="Enter the LineWidth" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black" value="1" min="0">
+                        <input type="number" name="" id="ynr" placeholder="Enter the y-coordinate" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black" value="0" min="0">
+                        <input type="number" name="" id="onr" placeholder="Enter the opacity" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black" value="1" min="0" max="1">
+                        <input type="text" title="Enter only 2 option border for outline rectangle and fill for complete rectangle" name="" id="sfnr" placeholder="only 2 option border and fill" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black"
+                            value="fill">
+                        <p id="fullhawrectnr" class="font-mono text-center mt-5 cursor-pointer text-violet-400 filter brightness-110 rounded underline-offset-4	decoration-inherit hover:underline">
+                            Get <b>FULL WIDTH AND HEIGHT</b> of canvas</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="linebox" class="div-bg h top
+            text-white p-8  box absolute right-0 overflow-hidden  bottom-0 
+            md:h top select-none backdrop-blur-md
+             overflow-y-scroll hidden width">
+                <div id="linedivs">
+                    <p class="font-mono ml-2 tracking-[0.5rem] text-xl">Line</p>
+                    <hr class="outline-none border-2 border-none h-[1px] bg-black my-2">
+                    <input type="number" name="" id="ll" placeholder="Enter the layer number" class="topbar-bg px-2 text-center rounded-sm py-2  w-full outline-none font-mono bg-black my-2">
+                    <button class="bg-black w-full py-2 rounded my-5" id="all">+ Add Layer</button>
+                    <hr class="outline-none border-2 border-none h-[1px] bg-black my-2">
+                    <div id="linedivs">
+                        <input type="number" name="" id="ppnx" placeholder="Enter the POINT NUMBER" class="topbar-bg px-2 text-center rounded-sm py-2  w-full outline-none font-mono bg-black my-2">
+                        <p id="plist" class="font-mono text-center mt-5 cursor-pointer text-violet-400 filter brightness-110 rounded underline-offset-4	decoration-inherit hover:underline">
+                            See the <b>POINT LIST</b></p>
+                        <div id="plistdiv" class="hidden">
+
+                        </div>
+
+                        <hr class="outline-none border-2 border-none h-[1px] bg-black my-2">
+                        <input type="number" name="" id="p0x" placeholder="Enter the x-coordinate" class="topbar-bg px-2 text-center rounded-sm py-2  w-full outline-none font-mono bg-black my-2">
+                        <input type="number" name="" id="p0y" placeholder="Enter the y-coordinate" class="topbar-bg px-2 text-center rounded-sm py-2 my-2 w-full outline-none font-mono bg-black">
+                    </div>
+                    <button class="bg-black w-full py-2 rounded my-5" id="apl">+ Add Point</button>
+                    <input type="text" name="" id="cl" placeholder="Enter the color" class="topbar-bg px-2 text-center rounded-sm py-2  w-full outline-none font-mono bg-black my-2">
+                    <input type="number" name="" id="lwl" placeholder="Enter the Line Width" class="topbar-bg px-2 text-center rounded-sm py-2  w-full outline-none font-mono bg-black my-2">
+                    <input type="text" name="" id="fsl" placeholder="FILL OR BORDER" class="topbar-bg px-2 text-center rounded-sm py-2  w-full outline-none font-mono bg-black my-2">
+                </div>
+                <div id="arcdivs">
+                    <p class="font-mono ml-2 tracking-[0.5rem] text-xl">Arc</p>
+                    <hr class="outline-none border-2 border-none h-[1px] bg-black my-2">
+                    <input type="number" name="" id="lla" placeholder="Enter the layer number" class="topbar-bg px-2 text-center rounded-sm py-2  w-full outline-none font-mono bg-black my-2">
+                    <button class="bg-black w-full py-2 rounded my-5" id="al">+ Add Layer</button>
+                    <hr class="outline-none border-2 border-none h-[1px] bg-black my-2">
+                    <div id="linedivs">
+                        <input type="number" name="" id="an" placeholder="Enter the Arc number" class="topbar-bg px-2 text-center rounded-sm py-2  w-full outline-none font-mono bg-black my-2 hidden" min="0">
+                        <button class="bg-black w-full py-2 rounded my-5 hidden" id="aa">+ Add Arc</button>
+                        <p id="alist" class="font-mono text-center mt-5 cursor-pointer text-violet-400 filter brightness-110 rounded underline-offset-4	decoration-inherit hover:underline hidden">
+                            See the <b>POINT LIST</b></p>
+                        <div id="plistdiva" class="hidden">
+
+                        </div>
+                        <input type="number" name="" id="pa0x" placeholder="Enter the x-coordinate1" class="topbar-bg px-2 text-center rounded-sm py-2  w-full outline-none font-mono bg-black  my-2">
+                        <input type="number" name="" id="pa0y" placeholder="Enter the y-coordinate1" class="topbar-bg px-2 text-center rounded-sm py-2 my-2 w-full outline-none font-mono bg-black ">
+                        <input type="number" name="" id="pa0x2" placeholder="Enter the x-coordinate2" class="topbar-bg px-2 text-center rounded-sm py-2  w-full outline-none font-mono bg-black  my-2">
+                        <input type="number" name="" id="pa0ry" placeholder="Enter the y-coordinate2" class="topbar-bg px-2 text-center rounded-sm py-2 my-2 w-full outline-none font-mono bg-black ">
+                        <input type="number" name="" id="pa0rx" placeholder="Enter the x-coordinate radius" class="topbar-bg px-2 text-center rounded-sm py-2  w-full outline-none font-mono bg-black  my-2">
+                        <input type="number" name="" id="pa0y2" placeholder="Enter the y-coordinate radius" class="topbar-bg px-2 text-center rounded-sm py-2 my-2 w-full outline-none font-mono bg-black">
+                        <input type="number" name="" id="ra" placeholder="Enter the radius" class="topbar-bg px-2 text-center rounded-sm py-2 my-2 w-full outline-none font-mono bg-black ">
+                        <p id="arauto" class="font-mono text-center mt-5 cursor-pointer text-violet-400 filter brightness-110 rounded underline-offset-4	decoration-inherit hover:underline">
+                            <b>AUTO RADIUS POINT SET</b>
+                        </p>
+                    </div>
+                    <input type="text" name="" id="cn" placeholder="Enter the color" class="topbar-bg px-2 text-center rounded-sm py-2  w-full outline-none font-mono bg-black my-2">
+                    <input type="number" name="" id="lwn" placeholder="Enter the Line Width" class="topbar-bg px-2 text-center rounded-sm py-2  w-full outline-none font-mono bg-black my-2">
+                    <input type="text" name="" id="fsn" placeholder="FILL OR BORDER" class="topbar-bg px-2 text-center rounded-sm py-2  w-full outline-none font-mono bg-black mt-2 mb-[3.5rem]">
+                </div>
+            </div>
+
+            <div id="erasebox" class="div-bg h top
+            text-white p-8  absolute right-0 overflow-hidden box  bottom-0 
+            md:h top select-none backdrop-blur-md
+             overflow-y-scroll hidden width">
+                <input type="number" name="" id="lnbge" placeholder="Enter the Layer number" class="topbar-bg px-2 text-center rounded-sm py-2  w-full outline-none font-mono bg-black" value="0" min="0">
+                <input type="number" name="" id="wer" placeholder="Enter the radius" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black" value="30" min="0">
+                <button class="rounded-md bg-black  px-40 py-2 mt-5 mb-[2rem] mx-14 font-mono" id="donebge">Done</button>
+
+                <hr class="outline-none border-2 border-none h-[1px] bg-black my-2">
+                <button class="rounded-md bg-black  px-40 py-2 mt-5 mb-[2rem] mx-14 font-mono" id="undo">Undo</button>
+                <button class="rounded-md bg-black  px-40 py-2 mt-5 mb-[2rem] mx-14 font-mono" id="clearbge">Clear all
+                    erase</button>
+                <input type="number" name="" id="per" placeholder="Enter the pixel" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black" value="1" min="0">
+            </div>
+
+            <div id="stickerbox" class="div-bg h top
+            text-white p-8  absolute right-0 overflow-hidden box  bottom-0 
+            md:h top select-none backdrop-blur-md
+             overflow-y-scroll hidden width">
+                <button class="rounded-md bg-black  px-40 py-2 mt-5 mb-[2rem] mx-1 font-mono" id="importimg">Import a
+                    file</button>
+                <input type="file" class="hidden" id="extraimage" accept="image/*">
+                <input type="number" name="" id="layer_ex_image" placeholder="Enter the image number" class="topbar-bg px-2 text-center rounded-sm py-2  w-full outline-none font-mono bg-black  my-2">
+                <input type="number" name="" id="r_eximg" placeholder="Enter the rotation" class="topbar-bg px-2 text-center rounded-sm py-2  w-full outline-none font-mono bg-black hidden my-2">
+                <input type="number" name="" id="y_eximg" placeholder="Enter the y-coordinate" class="topbar-bg px-2 text-center rounded-sm py-2 my-2 w-full outline-none font-mono bg-black ">
+                <input type="number" name="" id="x_eximg" placeholder="Enter the x-coordinate" class="topbar-bg px-2 text-center rounded-sm py-2  w-full outline-none font-mono bg-black  my-2">
+                <input type="number" name="" id="h_eximg" placeholder="Enter the height" class="topbar-bg px-2 text-center rounded-sm py-2 my-2 w-full outline-none font-mono bg-black">
+                <input type="number" name="" id="w_eximg" placeholder="Enter the width" class="topbar-bg px-2 text-center rounded-sm py-2 my-2 w-full outline-none font-mono bg-black ">
+                <p class="font-mono mt-5">Filter</p>
+                <br>
+                <div class="bg-black rounded-md mb-10">
+                    <p class="font-mono mt-5 pl-10 pt-5">Blur</p>
+                    <input type="range" name="" id="blur_filter" class="range mx-10 my-5" value="0">
+                </div>
+                <div class="bg-black rounded-md mb-10">
+                    <p class="font-mono mt-5 pl-10 pt-5">Brightness</p>
+                    <input type="range" name="" max="10" id="bright_filter" class="range mx-10 my-5" value="1">
+                </div>
+                <div class="bg-black rounded-md mb-10">
+                    <p class="font-mono mt-5 pl-10 pt-5">Contrast</p>
+                    <input type="range" name="" id="contrast_filter" class="range mx-10 my-5" value="89" max="200">
+                </div>
+                <div class="bg-black rounded-md mb-10">
+                    <p class="font-mono mt-5 pl-10 pt-5">Saturation</p>
+                    <input type="range" name="" id="saturation_filter" class="range mx-10 my-5" value="89" max="200">
+                </div>
+                <div class="bg-black rounded-md mb-10">
+                    <p class="font-mono mt-5 pl-10 pt-5">Invert</p>
+                    <input type="range" name="" id="invert_filter" class="range mx-10 my-5" value="0">
+                </div>
+
+                <div class="bg-black rounded-md mb-10">
+                    <p class="font-mono mt-5 pl-10 pt-5">Sepia</p>
+                    <input type="range" name="" id="sepia_filter" class="range mx-10 my-5" value="0">
+                </div>
+            </div>
+
+            <div id="filterbox" class="div-bg h top
+            text-white p-8  absolute right-0 overflow-hidden box  bottom-0 
+            md:h top select-none backdrop-blur-md
+             overflow-y-scroll hidden width">
+                <input type="file" class="hidden" id="extraimage" accept="image/*">
+                <p class="font-mono mt-5"><span class="text-red-500">Note: </span>This filter will only apply on "LAYER 0".
+                </p>
+                <div class="bg-black rounded-md mb-10">
+                    <p class="font-mono mt-5 pl-10 pt-5">Blur</p>
+                    <input type="range" name="" id="blur_filter1" class="range mx-10 my-5" value="0">
+                </div>
+                <div class="bg-black rounded-md mb-10">
+                    <p class="font-mono mt-5 pl-10 pt-5">Brightness</p>
+                    <input type="range" name="" max="10" id="bright_filter1" class="range mx-10 my-5" value="1">
+                </div>
+                <div class="bg-black rounded-md mb-10">
+                    <p class="font-mono mt-5 pl-10 pt-5">Contrast</p>
+                    <input type="range" name="" id="contrast_filter1" class="range mx-10 my-5" value="89" max="200">
+                </div>
+                <div class="bg-black rounded-md mb-10">
+                    <p class="font-mono mt-5 pl-10 pt-5">Saturation</p>
+                    <input type="range" name="" id="saturation_filter1" class="range mx-10 my-5" value="89" max="200">
+                </div>
+                <div class="bg-black rounded-md mb-10">
+                    <p class="font-mono mt-5 pl-10 pt-5">Invert</p>
+                    <input type="range" name="" id="invert_filter1" class="range mx-10 my-5" value="0">
+                </div>
+
+                <div class="bg-black rounded-md mb-10">
+                    <p class="font-mono mt-5 pl-10 pt-5">Sepia</p>
+                    <input type="range" name="" id="sepia_filter1" class="range mx-10 my-5" value="0">
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="outline-none font-mono hidden topbar-bg space-y-3 h-[17rem] overflow-y-auto absolute left-[30rem] bottom-[10rem] w-[20rem] rounded-sm shadow-lg shadow-black z-[100000000000000000000000000000000]" id="font-list">
+            <!-- <p></p> -->
+            <p class="text-white text-2xl text-center font-mono pt-3 cursor-pointer">Mono</p>
+            <p class="text-white text-2xl text-center font-sans cursor-pointer">Sans</p>
+            <p class="text-white text-2xl text-center font-serif cursor-pointer">Serif</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Acme', sans-serif;">Acme</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Architects Daughter', cursive;">Architects Daughter</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Balsamiq Sans', cursive;">
+                Balsamiq Sans</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Black Ops One', cursive;">
+                Black Ops One</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Bungee', cursive;
+            ">Bungee</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Bungee Hairline', cursive;
+            ">Bungee Hairline</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Bungee Inline', cursive;">
+                Bungee Inline</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Bungee Outline', cursive;">
+                Bungee Outline</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Bungee Shade', cursive;
+            ">Bungee Shade</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Caveat', cursive;
+            ">Caveat</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Comforter', cursive;
+            ">Comforter</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Dongle', sans-serif;
+            ">Dongle</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Inter', sans-serif;
+            ">Inter</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Lobster', cursive;
+            ">Lobster</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Mochiy Pop P One', sans-serif;
+            ">Mochiy Pop P One</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Montserrat', sans-serif;">
+                Montserrat</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Mukta', sans-serif;
+            ">Mukta</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Neonderthaw', cursive;
+            ">Neonderthaw</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Open Sans', sans-serif;
+            ">Open Sans</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Open Sans Condensed', sans-serif;
+            ">Open Sans Condensed</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Pacifico', cursive;
+            ">Pacifico</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Patrick Hand', cursive;
+            ">Patrick Hand</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Permanent Marker', cursive;
+            ">Permanent Marker</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Righteous', cursive;
+            ">Righteous</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Roboto Condensed', sans-serif;
+            ">Roboto Condensed</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Roboto Mono', monospace;
+            ">Roboto Mono</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Rubik', sans-serif;
+            ">Rubik</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Rubik Beastly', cursive;
+            ">Rubik Beastly</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Titillium Web', sans-serif;
+            ">Titillium Web</p>
+            <p class="text-white text-2xl text-center cursor-pointer" style="font-family: 'Sedgwick Ave', cursive;
+            ">Sedgwick Ave</p>
+            <p class="text-white text-2xl text-center  cursor-pointer" style="font-family: 'Redacted Script', cursive;
+            ">Redacted Script</p>
+            <p class="text-white text-2xl text-center  cursor-pointer" style="font-family: 'Nova Script', cursive;
+
+            ">Nova Script</p>
+            <p class="text-white text-2xl text-center  cursor-pointer" style="font-family: 'Shadows Into Light', cursive;
+
+            ">Shadows Into Light</p>
+            <p class="text-white text-2xl text-center pb-3 cursor-pointer" style="font-family: 'Indie Flower', cursive;
+
+
+            ">Indie Flower</p>
+        </div>
+
+        <div class="outline-none font-mono  topbar-bg space-y-3 h-[17rem] overflow-y-auto absolute left-[30rem] bottom-[10rem] w-[20rem] rounded-sm shadow-lg shadow-black z-[100000000000000000000000000000000] hidden" id="extracos">
+            <!-- <p></p> -->
+            <hr class="h-[2px] border-none bg-slate-800 ">
+            <div id="border">
+                <input type="text" name=" " id="bor-text " placeholder="Enter the color of border " class="topbar-bg px-2 text-center rounded-sm py-2 mt-[2.5rem] w-full outline-none font-mono text-white ">
+                <input type="text" name=" " id="bor2-text " placeholder="Enter the color of border 2 " class="topbar-bg px-2 text-center rounded-sm py-2 mt-[2.5rem] w-full outline-none font-mono text-white ">
+                <input type="text" name=" " id="px-bor-text " placeholder="Enter the PX of border " class="topbar-bg px-2 text-center rounded-sm py-2 mt-[2.5rem] w-full outline-none text-white font-mono ">
+                <input type="text" name=" " id="py-bor-text " placeholder="Enter the PY of border " class="topbar-bg px-2 text-center rounded-sm py-2 mt-[2.5rem] w-full outline-none text-white font-mono ">
+            </div>
+            <div id="border"></div>
+        </div>
+
+        <div id="zindexlayerbox" class="absolute top-40 left-[30%] topbar-bg w-[50%] h-[30%] text-white font-mono rounded-md hidden error-border">
+            <input type="text" name=" " class="mx-10 my-20 rounded-md outline-none px-2 h-10 w-[40%] font-mono bg-slate-900" id="lni" placeholder="Enter the layer number ">
+            <input type="text" name=" " class="rounded-md outline-none px-2 h-10 w-[40%] font-mono bg-slate-900 absolute left-[55%] top-[40%] " id="zii" placeholder="Enter the zIndex ">
+            <button class="absolute left-[40%] bottom-[5%] bg-slate-900 px-10 py-2 " id="donelayer">Done</button>
+        </div>
+
+        <!-- Edit Content -->
+        <div id="editcontent" class="flex to-pink-500 mt-0 text-white p-8 left-0 absolute bottom-0 px-5 py-2 select-none top div-bg div-color h md:absolute top overflow-x-hidden md:p-0 md:h md:mt-0 overflow-hidden overflow-y-scroll top mobiles ">
+            <div id="drawdiv" class="cursor-pointer h-ed w-full absolute left-0 top-5 select-none div-color h-fit div ">
+                <i class="fad fa-layer-group mx-6 text-3xl " style="user-select: auto; " id="drawbtn "></i>
+            </div>
+            <div id="layerdiv" class="cursor-pointer h-ed w-full absolute left-1 top-20 select-none div-color h-fit div ">
+                <i class="fad fa-brush mx-6 text-3xl "></i>
+            </div>
+            <div id="textdiv" class="cursor-pointer h-ed w-full absolute left-1 top-[8.5rem] select-none div-color h-fit div ">
+                <i class="fad fa-text mx-6 text-3xl "></i>
+            </div>
+            <div id="textcos" class="cursor-pointer h-ed w-full absolute left-1 top-[11.5rem] select-none div-color h-fit div ">
+                <i class="fad fa-font mx-6 text-3xl "></i>
+            </div>
+            <div id="shapesdiv" class="cursor-pointer h-ed w-full absolute left-1 top-[14.4rem] select-none div-color h-fit div ">
+                <i class="fad fa-shapes mx-6 text-3xl "></i>
+            </div>
+
+            <div id="linediv" class="cursor-pointer h-ed w-full absolute left-1 top-[18rem] select-none div-color h-fit div ">
+                <i class="fal fa-ruler mx-6 text-3xl "></i>
+            </div>
+
+            <div id="erasediv" class="cursor-pointer h-ed w-full absolute left-1 top-[21rem] select-none div-color h-fit div ">
+                <i class="fad fa-eraser mx-6 text-3xl "></i>
+            </div>
+
+            <div id="sticker" class="cursor-pointer h-ed w-full absolute left-1 top-[24.5rem] select-none div-color h-fit div ">
+                <i class="fad fa-images mx-6 text-3xl "></i>
+            </div>
+
+            <div id="filterdiv" class="cursor-pointer h-ed w-full absolute left-1 top-[28rem] select-none div-color h-fit div ">
+                <i class="fad fa-filter mx-6 text-3xl "></i>
+            </div>
+        </div>
+
+        <div id="other" class="absolute top-0 left-0 w-screen topbar-bg h-t ">
+            <p id="size" class="text-white font-mono px-5 py-4 size ">0 X 0</p>
+            <input type="text" name=" " value="manducare meum stercore" id="nameimg" class="w-70 absolute top-0 right-40 my-4 px-3 div-color selection:bg-indigo-400 selection:text-white bg-transparent outline-none focus:border-b-2 ">
+            <button id="downloadbtn" class="absolute right-5 py-1 top-0 my-3 bg-download px-5 text-white font-mono rounded hover:shadow-green-300 hover:shadow-lg ">Download</button>
+            <button id="zoomin" class="text-white mb-2 border-2 px-3 font-mono rounded ">+</button>
+            <p id="zoompara" class="mb-3 div-color px-3 font-mono rounded ">Zoom-in: <span>1</span>%</p>
+            <button id="zoomout" class="text-white mb-1 border-2 px-3 font-mono rounded ">-</button>
+        </div>
+
+        <div id="error" class="topbar-bg px-10 py-5 w-[40%] rounded-md hidden fixed left-[34%] bottom-20 text-white font-mono z-40 error-border ">
+            <p id="errorpara" class="text-center ">Error</p>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js "></script>
+    <script src="CanvasStack-2v01.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5 "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+    <script src="script.js "></script>
+</body>
+
+</html>
