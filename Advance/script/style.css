@@ -21,6 +21,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 div::-webkit-scrollbar {
+    height: 4px;
+    /* height of horizontal scrollbar ← You're missing this */
     width: 2px;
     /* width of the entire scrollbar */
 }
@@ -299,6 +301,9 @@ body {
 /* I don't know why but I am using media quries */
 
 @media only screen and (max-width: 800px) {
+    #size {
+        display: none;
+    }
     .box {
         width: 100%;
         height: 50%;
@@ -345,22 +350,37 @@ body {
         top: 1rem;
         left: 25rem;
     }
+    #editcontent {
+        overflow-x: scroll;
+    }
     #erasediv {
         position: absolute;
         top: 1rem;
         left: 30rem;
     }
+    #sticker {
+        position: absolute;
+        top: 1rem;
+        left: 35rem;
+    }
+    #filterdiv {
+        position: absolute;
+        top: 1rem;
+        left: 40rem;
+    }
     #zoompara {
         position: absolute;
         top: 33rem;
     }
-    #zoom-in {
+    .mb-1 {
         position: absolute;
         top: 33rem;
+        left: 40%;
     }
-    #zoom-out {
+    .mb-2 {
         position: absolute;
         top: 33rem;
+        left: 28rem;
     }
     #canvasdiv {
         position: absolute;
@@ -370,6 +390,9 @@ body {
 }
 
 @media all and (max-width: 420px) {
+    #size {
+        display: none;
+    }
     .box {
         width: 100%;
         height: 50%;
@@ -416,29 +439,44 @@ body {
         top: 1rem;
         left: 25rem;
     }
+    #editcontent {
+        overflow-x: scroll;
+        position: absolute;
+        width: 110vw;
+        top: 60.5rem;
+    }
     #erasediv {
         position: absolute;
         top: 1rem;
         left: 30rem;
     }
+    #sticker {
+        position: absolute;
+        top: 1rem;
+        left: 35rem;
+    }
+    #filterdiv {
+        position: absolute;
+        top: 1rem;
+        left: 40rem;
+    }
     #zoompara {
         position: absolute;
         top: 33rem;
     }
-    #zoom-in {
+    .mb-1 {
         position: absolute;
         top: 33rem;
+        left: 40%;
     }
-    #zoom-out {
+    .mb-2 {
         position: absolute;
         top: 33rem;
+        left: 28rem;
     }
     #canvasdiv {
         position: absolute;
         top: 30%;
         left: 10%;
-    }
-    #size {
-        display: none;
     }
 }
