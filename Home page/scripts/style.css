@@ -1,26 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Redacted+Script&family=Source+Sans+Pro:wght@300&display=swap');
-body{
-  overflow-x: hidden;
-}
-html{
-  scroll-behavior: smooth;
-}
-body::-webkit-scrollbar {
-  width: 2px;               /* width of the entire scrollbar */
-}
-body::-webkit-scrollbar-thumb {
-  background-color: grey;    /* color of the scroll thumb */
-  border-radius: 5px;       /* roundness of the scroll thumb */
+body {
+    overflow-x: hidden;
 }
 
-.blueprint{
-  color: rgb(248, 15, 15);
-  background-color: aquamarine;
-  position: fixed;
-  bottom: 2rem;
-  right: 1rem;
-  border-radius: 100px;
-  padding: 7px 10px;
-  cursor: pointer;
-  color: white;
+html {
+    scroll-behavior: smooth;
+}
+
+body::-webkit-scrollbar {
+    width: 2px;
+    /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: grey;
+    /* color of the scroll thumb */
+    border-radius: 5px;
+    /* roundness of the scroll thumb */
+}
+
+.blueprint {
+    color: rgb(248, 15, 15);
+    background-color: aquamarine;
+    position: fixed;
+    bottom: 2rem;
+    right: 1rem;
+    border-radius: 100px;
+    padding: 7px 10px;
+    cursor: pointer;
+    color: white;
+}
+
+.addiv {
+    width: max-content;
+    height: max-content;
+    display: none;
 }
