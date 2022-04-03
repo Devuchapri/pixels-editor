@@ -737,7 +737,9 @@ document.getElementById("donet").addEventListener("click", (e) => {
     })
 
     current_text.font = "30px mono";
+    current_text.fillStyle = "white";
     current_text.textAlign = "center";
+
     textlist.push(document.getElementById("textinput").value);
     current_text.fillText(document.getElementById("textinput").value, document.getElementById("canvas").width / 2, document.getElementById("canvas").height / 2);
 
@@ -745,7 +747,10 @@ document.getElementById("donet").addEventListener("click", (e) => {
 
     paratextnumber = parseInt(para.innerHTML.slice(4));
 
-    current_layer = layers[Layernumber]
+    current_layer = layers[Layernumber];
+
+    document.getElementById("x-coordinate").value = canvas.width / 2;
+    document.getElementById("y-coordinate").value = (canvas.height / 2) + (parseInt(document.getElementById("font-size").value) / 2);
 })
 
 click(document.getElementById("textcos"), document.getElementById("textcosbox"));
@@ -769,6 +774,17 @@ colorpickert.on("color:change", color => {
     hex_color = color.hexString;
     current_colorth = color.hexString;
     current_colort = `rgba(${parseInt(current_colorth[1] + current_colorth[2], 16)} , ${parseInt(current_colorth[3] + current_colorth[4], 16)} , ${parseInt(current_colorth[5] + current_colorth[6], 16)} , ${document.getElementById("opacity").value / 100})`
+    current_text.clearRect(0, 0, canvas.width, canvas.height);
+    current_text.beginPath();
+    current_text.font = `${document.getElementById("font-size").value}px ${para.innerHTML}`;
+    current_text.fillStyle = current_colort;
+    current_text.fillText(document.getElementById("textinput2").value, document.getElementById("x-coordinate").value, document.getElementById("y-coordinate").value);
+})
+
+document.getElementById("axy").addEventListener("click", () => {
+    document.getElementById("x-coordinate").value = canvas.width / 2;
+    document.getElementById("y-coordinate").value = (canvas.height / 2) + (parseInt(document.getElementById("font-size").value) / 2);
+    current_text.beginPath();
     current_text.clearRect(0, 0, canvas.width, canvas.height);
     current_text.beginPath();
     current_text.font = `${document.getElementById("font-size").value}px ${para.innerHTML}`;
