@@ -169,6 +169,21 @@ let changeclass = (element, old_class, new_class) => {
     element.classList.remove(old_class);
 }
 
+let close = () => {
+    document.getElementById("font-list").style.display = "none";
+}
+
+let magic_click = true;
+
+window.addEventListener("click", () => {
+    if (magic_click == true) {
+        close();
+        magic_click = false;
+    } else {
+        magic_click = true;
+    }
+})
+
 // Making the object visible
 let click = (div, box) => {
     div.addEventListener("click", () => {
@@ -641,7 +656,8 @@ document.getElementById("canvasdiv").addEventListener("touchmove", (e) => {
         }
         // layers[document.getElementById("lnbge").value].globalCompositeOperation = "source-over";
     }
-})
+});
+
 
 
 document.getElementById("colorn").addEventListener("click", () => {
