@@ -543,7 +543,8 @@ document.getElementById("doned").addEventListener("click", () => {
 })
 
 undolist = [];
-undo = -1
+undonumber = [0]
+undo = 0;
 
 document.getElementById("canvasdiv").addEventListener("mousemove", (e) => {
     if (filterb) {
@@ -594,10 +595,12 @@ document.getElementById("canvasdiv").addEventListener("mousemove", (e) => {
             layers[document.getElementById("lnbge").value].fill();
             layers[document.getElementById("lnbge").value].restore();
             layers[document.getElementById("lnbge").value].globalCompositeOperation = 'destination-over';
-            // layers[document.getElementById("lnbge").value].globalCompositeOperation = "source-over";
+        }
+        if (undolist.length - 1 != -1) {
+            undonumber.push(undolist.length - 1);
         }
     }
-})
+});
 
 document.getElementById("canvasdiv").addEventListener("touchmove", (e) => {
     if (filterb) {
@@ -1462,12 +1465,8 @@ document.getElementById("undo").addEventListener("click", () => {
     if (undo < 0) {
         undo = 1;
     }
-    layers[document.getElementById("lnbge").value].putImageData(undolist[undo], 0, 0);
-    if (undo < 0) {
-        undo = 1;
-    } else {
-        undo -= document.getElementById("per").value;
-    }
+    layers[document.getElementById("lnbge").value].putImageData(undolist[undonumber[undo]], 0, 0);
+    undo -= 1;
     undolist.pop();
 });
 
