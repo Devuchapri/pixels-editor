@@ -761,12 +761,24 @@ let bgnone = false;
 let bordernone = false;
 
 let current_colort = "#ffffff";
+let hex_color = "#ffffff"
 
 colorpickert.on("color:change", color => {
     document.getElementById("ipt").style.color = color.hexString;
     document.getElementById("ipt").innerHTML = color.hexString;
+    hex_color = color.hexString;
     current_colorth = color.hexString;
-    current_colort = `rgba(${parseInt(current_colorth[1] + current_colorth[2], 16)} , ${parseInt(current_colorth[3] + current_colorth[4], 16)} , ${parseInt(current_colorth[5] + current_colorth[6], 16)} , ${document.getElementById("opacity").value})`
+    current_colort = `rgba(${parseInt(current_colorth[1] + current_colorth[2], 16)} , ${parseInt(current_colorth[3] + current_colorth[4], 16)} , ${parseInt(current_colorth[5] + current_colorth[6], 16)} , ${document.getElementById("opacity").value / 100})`
+    current_text.clearRect(0, 0, canvas.width, canvas.height);
+    current_text.beginPath();
+    current_text.font = `${document.getElementById("font-size").value}px ${para.innerHTML}`;
+    current_text.fillStyle = current_colort;
+    current_text.fillText(document.getElementById("textinput2").value, document.getElementById("x-coordinate").value, document.getElementById("y-coordinate").value);
+})
+
+document.getElementById("opacity").addEventListener("input", () => {
+    current_colorth = hex_color;
+    current_colort = `rgba(${parseInt(current_colorth[1] + current_colorth[2], 16)} , ${parseInt(current_colorth[3] + current_colorth[4], 16)} , ${parseInt(current_colorth[5] + current_colorth[6], 16)} , ${document.getElementById("opacity").value / 100})`
     current_text.clearRect(0, 0, canvas.width, canvas.height);
     current_text.beginPath();
     current_text.font = `${document.getElementById("font-size").value}px ${para.innerHTML}`;
@@ -807,11 +819,12 @@ document.getElementById("y-coordinate").addEventListener("input", () => {
     current_text.fillStyle = current_colort;
     current_text.fillText(document.getElementById("textinput2").value, document.getElementById("x-coordinate").value, document.getElementById("y-coordinate").value);
 })
+let current_font = "mono";
 document.getElementById("font-size").addEventListener("input", () => {
     current_text.beginPath();
     current_text.clearRect(0, 0, canvas.width, canvas.height);
     current_text.beginPath();
-    current_text.font = `${document.getElementById("font-size").value}px ${para.innerHTML}`;
+    current_text.font = `${document.getElementById("font-size").value}px ${current_font}`;
     current_text.fillStyle = current_colort;
     current_text.fillText(document.getElementById("textinput2").value, document.getElementById("x-coordinate").value, document.getElementById("y-coordinate").value);
 })
@@ -837,6 +850,7 @@ document.querySelectorAll("#font-list p").forEach(para => {
         current_text.beginPath();
         current_text.clearRect(0, 0, canvas.width, canvas.height);
         current_text.beginPath();
+        current_font = para.innerHTML;
         current_text.font = `${document.getElementById("font-size").value}px ${para.innerHTML}`;
         current_text.fillStyle = current_colort;
         current_text.fillText(document.getElementById("textinput2").value, document.getElementById("x-coordinate").value, document.getElementById("y-coordinate").value);
