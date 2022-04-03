@@ -21,6 +21,8 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+draw = false;
+
 const size = $("#size").get(0);
 const nameimg = $("#nameimg").get(0);
 const downloadbtn = $("#downloadbtn").get(0);
@@ -170,6 +172,11 @@ let changeclass = (element, old_class, new_class) => {
 // Making the object visible
 let click = (div, box) => {
     div.addEventListener("click", () => {
+        if (div == document.getElementById("layerdiv")) {
+            draw = true;
+        } else {
+            draw = false;
+        }
         if (box.style.display != "none") {
             box.style.display = "none";
             div.style.color = "#5c5c63";
@@ -253,6 +260,21 @@ document.onmousemove = (e) => {
     }
 }
 
+document.ontouchend = () => {
+    dragvalue = null;
+    canvas.style.cursor = "grab";
+}
+document.ontouchmove = (e) => {
+    gap = document.getElementById("canvas").offsetLeft;
+    x = Math.floor(e.touches[0].clientX - gap);
+    y = Math.floor(e.touches[0].clientY - document.getElementById("canvas").offsetTop);
+
+    if (dragvalue != null) {
+        dragvalue.style.left = x + "px";
+        dragvalue.style.top = y + "px";
+        canvas.style.cursor = "grabbing";
+    }
+}
 
 let layerbtn = document.getElementById("layerbtn");
 let Layernumber = 0;
@@ -278,7 +300,9 @@ layerbtn.addEventListener("click", () => {
         sleep(1000).then(() => { document.getElementById("error").style.display = "none"; });
     }
 
-})
+});
+
+
 
 document.getElementById("deletelayer").addEventListener("click", () => {
     if (fileuploaded == true) {
@@ -561,52 +585,60 @@ document.getElementById("canvasdiv").addEventListener("mousemove", (e) => {
 
 document.getElementById("canvasdiv").addEventListener("touchmove", (e) => {
     if (filterb) {
-        const rect = canvas.getBoundingClientRect();
-        pos.x = e.touches[0].clientX - rect.left;
-        pos.y = e.touches[0].clientY - rect.top;
-        filterctx.beginPath();
-        filterctx.filter = `blur(${document.getElementById("blurf").value}px) brightness(${getElement("brightf")}) contrast(${getElement("contrastf")}%) invert(${getElement("invertf")}%) sepia(${getElement("sepiaf")}%) saturate(${getElement("saturationf")}%)`;
-        filterctx.fillStyle = getpixelcolor(pos.x, pos.y);
-        filterctx.arc(pos.x, pos.y, document.getElementById("thicknessf").value, 0, Math.PI * 2, false);
-        filterctx.fill();
+        if (draw) {
+            const rect = canvas.getBoundingClientRect();
+            pos.x = e.touches[0].clientX - rect.left;
+            pos.y = e.touches[0].clientY - rect.top;
+            filterctx.beginPath();
+            filterctx.filter = `blur(${document.getElementById("blurf").value}px) brightness(${getElement("brightf")}) contrast(${getElement("contrastf")}%) invert(${getElement("invertf")}%) sepia(${getElement("sepiaf")}%) saturate(${getElement("saturationf")}%)`;
+            filterctx.fillStyle = getpixelcolor(pos.x, pos.y);
+            filterctx.arc(pos.x, pos.y, document.getElementById("thicknessf").value, 0, Math.PI * 2, false);
+            filterctx.fill();
+        }
     }
     if (eraseb) {
-        const rect = canvas.getBoundingClientRect();
-        pos.x = e.touches[0].clientX - rect.left;
-        pos.y = e.touches[0].clientY - rect.top;
-        filterctx.beginPath();
-        filterctx.clearRect(pos.x, pos.y, document.getElementById("thicknesse").value, document.getElementById("thicknesse").value)
-        filterctx.fill();
-        getpos(e);
-        drawctx.beginPath();
-        drawctx.clearRect(pos.x, pos.y, document.getElementById("thicknesse").value, document.getElementById("thicknesse").value)
-        drawctx.fill();
+        if (draw) {
+            const rect = canvas.getBoundingClientRect();
+            pos.x = e.touches[0].clientX - rect.left;
+            pos.y = e.touches[0].clientY - rect.top;
+            filterctx.beginPath();
+            filterctx.clearRect(pos.x, pos.y, document.getElementById("thicknesse").value, document.getElementById("thicknesse").value)
+            filterctx.fill();
+            getpos(e);
+            drawctx.beginPath();
+            drawctx.clearRect(pos.x, pos.y, document.getElementById("thicknesse").value, document.getElementById("thicknesse").value)
+            drawctx.fill();
+        }
     }
     if (drawb) {
-        const rect = canvas.getBoundingClientRect();
-        pos.x = e.touches[0].clientX - rect.left;
-        pos.y = e.touches[0].clientY - rect.top;
-        drawctx.beginPath();
-        drawctx.filter = `blur(${document.getElementById("blurd").value}px)`;
-        drawctx.fillStyle = `rgb(${parseInt(current_colorn[1] + current_colorn[2], 16)} , ${parseInt(current_colorn[3] + current_colorn[4], 16)} , ${parseInt(current_colorn[5] + current_colorn[6], 16)})`;
-        drawctx.arc(pos.x, pos.y, document.getElementById("thicknessd").value, 0, Math.PI * 2, false);
-        drawctx.fill();
+        if (draw) {
+            const rect = canvas.getBoundingClientRect();
+            pos.x = e.touches[0].clientX - rect.left;
+            pos.y = e.touches[0].clientY - rect.top;
+            drawctx.beginPath();
+            drawctx.filter = `blur(${document.getElementById("blurd").value}px)`;
+            drawctx.fillStyle = `rgb(${parseInt(current_colorn[1] + current_colorn[2], 16)} , ${parseInt(current_colorn[3] + current_colorn[4], 16)} , ${parseInt(current_colorn[5] + current_colorn[6], 16)})`;
+            drawctx.arc(pos.x, pos.y, document.getElementById("thicknessd").value, 0, Math.PI * 2, false);
+            drawctx.fill();
+        }
     }
     if (bge) {
-        const rect = canvas.getBoundingClientRect();
-        pos.x = e.touches[0].clientX - rect.left;
-        pos.y = e.touches[0].clientY - rect.top;
-        undolist.push(layers[document.getElementById("lnbge").value].getImageData(0, 0, canvas.width, canvas.height));
+        if (draw) {
+            const rect = canvas.getBoundingClientRect();
+            pos.x = e.touches[0].clientX - rect.left;
+            pos.y = e.touches[0].clientY - rect.top;
+            undolist.push(layers[document.getElementById("lnbge").value].getImageData(0, 0, canvas.width, canvas.height));
 
-        layers[document.getElementById("lnbge").value].beginPath();
-        // layers[document.getElementById("lnbge").value].clearRect(pos.x, pos.y, document.getElementById("wer").value, document.getElementById("her").value)
-        layers[document.getElementById("lnbge").value].save();
-        layers[document.getElementById("lnbge").value].globalCompositeOperation = 'destination-out';
-        layers[document.getElementById("lnbge").value].beginPath();
-        layers[document.getElementById("lnbge").value].arc(pos.x, pos.y, document.getElementById("wer").value, 0, 2 * Math.PI, false);
-        layers[document.getElementById("lnbge").value].fill();
-        layers[document.getElementById("lnbge").value].restore();
-        layers[document.getElementById("lnbge").value].globalCompositeOperation = 'destination-over';
+            layers[document.getElementById("lnbge").value].beginPath();
+            // layers[document.getElementById("lnbge").value].clearRect(pos.x, pos.y, document.getElementById("wer").value, document.getElementById("her").value)
+            layers[document.getElementById("lnbge").value].save();
+            layers[document.getElementById("lnbge").value].globalCompositeOperation = 'destination-out';
+            layers[document.getElementById("lnbge").value].beginPath();
+            layers[document.getElementById("lnbge").value].arc(pos.x, pos.y, document.getElementById("wer").value, 0, 2 * Math.PI, false);
+            layers[document.getElementById("lnbge").value].fill();
+            layers[document.getElementById("lnbge").value].restore();
+            layers[document.getElementById("lnbge").value].globalCompositeOperation = 'destination-over';
+        }
         // layers[document.getElementById("lnbge").value].globalCompositeOperation = "source-over";
     }
 })
@@ -619,7 +651,6 @@ document.getElementById("colorn").addEventListener("click", () => {
         document.getElementById("colorpicker").style.display = "block"
     }
 });
-// document.getElementById("colorn").click();
 
 click(document.getElementById("textdiv"), document.getElementById("textbox"));
 
