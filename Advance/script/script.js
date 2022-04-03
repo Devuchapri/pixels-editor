@@ -171,6 +171,7 @@ let changeclass = (element, old_class, new_class) => {
 
 let close = () => {
     document.getElementById("font-list").style.display = "none";
+    document.getElementById("zindexlayerbox").style.display = "none";
 }
 
 let magic_click = true;
