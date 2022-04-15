@@ -357,11 +357,6 @@ document.getElementById("copylayer").addEventListener("click", () => {
     }
 })
 
-document.getElementById("currentlayer").addEventListener("click", () => {
-    let cl = prompt("enter the layer number");
-    current_layer = layers[cl];
-})
-
 document.getElementById("zindexlayerbox").style.display = "none";
 document.getElementById("zindexlayer").addEventListener("click", () => {
     if (fileuploaded == true) {
@@ -424,7 +419,7 @@ colorpicker.on("color:change", color => {
 })
 
 let getpixelcolor = (x, y) => {
-    let pixelData = ctx.getImageData(x, y, 1, 1);
+    let pixelData = layers[document.getElementById("layerf").value].getImageData(x, y, 1, 1);
     let data = pixelData.data;
     let pixelColor = `rgba(${data[0]} , ${data[1]} , ${data[2]} , ${data[3]})`;
     return pixelColor;
@@ -500,27 +495,6 @@ document.getElementById("donebge").addEventListener("click", () => {
 
 })
 
-document.getElementById("donee").addEventListener("click", () => {
-
-    if (fileuploaded == true) {
-        // canvases[1].width = document.getElementById("canvas").width
-        // canvases[1].height = document.getElementById("canvas").height
-        // canvases[2].width = document.getElementById("canvas").width
-        // canvases[2].height = document.getElementById("canvas").height
-        filterb = false;
-        eraseb = true;
-        drawb = false;
-        bge = false;
-        document.getElementById("errorpara").innerHTML = "Hold <b>CTRL</b> key to use this tool.";
-        document.getElementById("error").style.display = "block";
-        sleep(2000).then(() => { document.getElementById("error").style.display = "none"; });
-    } else {
-        document.getElementById("errorpara").innerHTML = "Please upload something";
-        document.getElementById("error").style.display = "block";
-        sleep(1000).then(() => { document.getElementById("error").style.display = "none"; });
-    }
-
-})
 document.getElementById("doned").addEventListener("click", () => {
     if (fileuploaded == true) {
         filterb = false;
@@ -549,34 +523,26 @@ undo = 0;
 document.getElementById("canvasdiv").addEventListener("mousemove", (e) => {
     if (filterb) {
         if (e.ctrlKey) {
+            filterctx = layers[document.getElementById("layerf").value];
             getpos(e);
             filterctx.beginPath();
             filterctx.filter = `blur(${document.getElementById("blurf").value}px) brightness(${getElement("brightf")}) contrast(${getElement("contrastf")}%) invert(${getElement("invertf")}%) sepia(${getElement("sepiaf")}%) saturate(${getElement("saturationf")}%)`;
             filterctx.fillStyle = getpixelcolor(pos.x, pos.y);
             filterctx.arc(pos.x, pos.y, document.getElementById("thicknessf").value, 0, Math.PI * 2, false);
             filterctx.fill();
-        }
-    }
-    if (eraseb) {
-        if (e.ctrlKey) {
-            getpos(e);
-            filterctx.beginPath();
-            filterctx.clearRect(pos.x, pos.y, document.getElementById("thicknesse").value, document.getElementById("thicknesse").value)
-            filterctx.fill();
-            getpos(e);
-            drawctx.beginPath();
-            drawctx.clearRect(pos.x, pos.y, document.getElementById("thicknesse").value, document.getElementById("thicknesse").value)
-            drawctx.fill();
+            filterctx.filter = `blur(0px) brightness(1) contrast(89%) invert(0%) sepia(0%) saturate(89%)`;
         }
     }
     if (drawb) {
         if (e.ctrlKey) {
             getpos(e);
+            drawctx = layers[document.getElementById("layern").value];
             drawctx.beginPath();
             drawctx.filter = `blur(${document.getElementById("blurd").value}px)`;
             drawctx.fillStyle = `rgb(${parseInt(current_colorn[1] + current_colorn[2], 16)} , ${parseInt(current_colorn[3] + current_colorn[4], 16)} , ${parseInt(current_colorn[5] + current_colorn[6], 16)})`;
             drawctx.arc(pos.x, pos.y, document.getElementById("thicknessd").value, 0, Math.PI * 2, false);
             drawctx.fill();
+            drawctx.filter = `blur(0px)`;
         }
     }
     if (bge) {
