@@ -81,17 +81,14 @@ rel="stylesheet">
 <p class="para" id="layer0">Layer <span>0</span></p>
 </div>
 
-<hr>
-
-<div class="font-mono bg-black w-full fixed top-0 left-0" id="addlayer">
+<div class="font-mono menu-bg w-full fixed top-0 left-0" id="addlayer">
 <ul class="ul flex w-full sticky" id="contlay">
 <li id="layerbtn" class="cursor-pointer py-4 px-5 lihover hover:bg-cyan-400">Add Layers</li>
-<li id="deletelayer" class="cursor-pointer py-4 text-center ihover hover:bg-cyan-400">Delete Layers
+<li id="deletelayer" class="cursor-pointer py-4 text-center ihover">Delete Layers
 </li>
 <li id="copylayer" class="cursor-pointer py-4 text-center ihover hover:bg-cyan-400">Copy Layers
 </li>
 <li id="zindexlayer" class="cursor-pointer py-4 text-center px-5 ihover hover:bg-cyan-400">Set Zindex of Layers</li>
-<li id="currentlayer" class="cursor-pointer py-4 text-center ihover hover:bg-cyan-400 ">Current Layers
 </li>
 </ul>
 </div>
@@ -101,8 +98,10 @@ rel="stylesheet">
             md:h top select-none backdrop-blur-md
              overflow-y-scroll hidden width box">
 <div id="filter">
-<p class="font-mono text-xl hr">Dhokla Effect</p>
+<p class="font-mono text-xl hr">Shitty Effect</p>
 <!-- <hr> -->
+<input type="Number" placeholder="Enter the layer number" class="outline-none mt-5 rounded-md bg-black text-center py-2 w-[100%]" id="layerf">
+
 <div id="" class="bg-black mt-5 rounded-md" value="50">
 <p class="mx-10 pt-2 text-xl font-thin font-mono">Thickness</p>
 <input type="range" name="" id="thicknessf" class="range mx-10 my-5" value="10" min="10" max="50">
@@ -121,19 +120,11 @@ rel="stylesheet">
 <p class="mx-10 pt-2 text-xl font-thin font-mono">Sepia</p>
 <input type="range" name="" id="sepiaf" class="range mx-10 my-5" value="0">
 </div>
-<button id="donef" class="rounded-md bg-black px-40 py-2 my-5 mx-14 font-mono">Done</button>
-</div>
-<div id="Erase">
-<p class="font-mono text-xl hr">Erase</p>
-<!-- <hr> -->
-<div id="thickness" class="bg-black  mt-5 rounded-md">
-<p class="mx-10 pt-2 text-xl font-thin font-mono">Thickness</p>
-<input type="range" name="" id="thicknesse" class="range mx-10 my-5" value="100" max="200">
-</div>
-<button class="rounded-md bg-black px-40 py-2 my-5 mx-14 font-mono" id="donee">Done</button>
+<button id="donef" class="rounded-md bg-black px-40 py-2 my-5 mx-3 font-mono">Done</button>
 </div>
 <div id="normal">
 <p class="font-mono text-xl hr">Normal</p>
+<input type="Number" placeholder="Enter the layer number" class="outline-none mt-5 rounded-md bg-black text-center py-2 w-[100%]" id="layern">
 <div id="thicknessn" class="bg-black  mt-5 rounded-md">
 <p class="mx-10 pt-2 text-xl font-thin font-mono">Thickness</p>
 <input type="range" name="" id="thicknessd" class="range mx-10 my-5" value="50">
@@ -147,10 +138,10 @@ rel="stylesheet">
 <p class="text-xl py-5 font-thin font-mono text-center" id="ipn">#FFFFFF</p>
 </div>
 </div>
-<div id="colorpicker" class="absolute left-[30%] hidden top-[80%] bg-white p-4 rounded-md">
+<div id="colorpicker" class="absolute left-[30%] hidden top-[110%] bg-white p-4 rounded-md">
 
 </div>
-<button class="rounded-md bg-black  px-40 py-2 mt-5 mb-[2rem] mx-14 font-mono" id="doned">Done</button>
+<button class="rounded-md bg-black  px-40 py-2 mt-5 mb-[2rem] mx-4 font-mono" id="doned">Done</button>
 </div>
 
 </div>
@@ -347,11 +338,11 @@ See the <b>POINT LIST</b></p>
              overflow-y-scroll hidden width">
 <input type="number" name="" id="lnbge" placeholder="Enter the Layer number" class="topbar-bg px-2 text-center rounded-sm py-2  w-full outline-none font-mono bg-black" value="0" min="0">
 <input type="number" name="" id="wer" placeholder="Enter the radius" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black" value="30" min="0">
-<button class="rounded-md bg-black  px-40 py-2 mt-5 mb-[2rem] mx-14 font-mono" id="donebge">Done</button>
+<button class="rounded-md bg-black  px-40 py-2 mt-5 mb-[2rem] mx-4 font-mono" id="donebge">Done</button>
 
 <hr class="outline-none border-2 border-none h-[1px] bg-black my-2">
-<button class="rounded-md bg-black  px-40 py-2 mt-5 mb-[2rem] mx-14 font-mono" id="undo">Undo</button>
-<button class="rounded-md bg-black  px-40 py-2 mt-5 mb-[2rem] mx-14 font-mono" id="clearbge">Clear all
+<button class="rounded-md bg-black  px-40 py-2 mt-5 mb-[2rem] mx-4 font-mono" id="undo">Undo</button>
+<button class="rounded-md bg-black  px-40 py-2 mt-5 mb-[2rem] mx-4 font-mono" id="clearbge">Clear all
                     erase</button>
 <input type="number" name="" id="per" placeholder="Enter the pixel" class="topbar-bg px-2 text-center rounded-sm py-2 mt-5 w-full outline-none font-mono bg-black" value="1" min="0">
 </div>
